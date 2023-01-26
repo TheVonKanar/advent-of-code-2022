@@ -21,6 +21,7 @@ pub fn draw_body(
 
                     ui.label(format!("Part 1: {}", solution.0.to_string()));
                     ui.label(format!("Part 2: {}", solution.1.to_string()));
+                    ui.label(solution.2);
                 }
             }
         }
