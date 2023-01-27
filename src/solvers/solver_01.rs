@@ -5,8 +5,10 @@ use super::{get_puzzle, Info, Solution, Solver};
 pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &mut Info) {
     let timer = Instant::now();
     let puzzle = get_puzzle(solver.index);
+
     let mut loads: Vec<usize> = vec![];
     let mut current: usize = 0;
+
     for line in puzzle.lines() {
         match line.parse::<usize>() {
             Ok(calories) => current += calories,

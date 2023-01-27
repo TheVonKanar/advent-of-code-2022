@@ -5,13 +5,15 @@ use super::{get_puzzle, Info, Solution, Solver};
 pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &mut Info) {
     let timer = Instant::now();
     let puzzle = get_puzzle(solver.index);
-    let mut score_1: usize = 0;
-    let mut score_2: usize = 0;
+
+    solution.0 = 0;
+    solution.1 = 0;
+
     for line in puzzle.lines() {
         let cols: Vec<&str> = line.split(" ").collect();
 
         // Part 1: XYZ is Rock/Paper/Scissors.
-        score_1 += match cols[0] {
+        solution.0 += match cols[0] {
             "A" => match cols[1] {
                 "X" => 1 + 3,
                 "Y" => 2 + 6,
@@ -34,7 +36,7 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
         };
 
         // Part 2: XYZ is Lose/Draw/Win.
-        score_2 += match cols[0] {
+        solution.1 += match cols[0] {
             "A" => match cols[1] {
                 "X" => 0 + 3,
                 "Y" => 3 + 1,
@@ -57,8 +59,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
         }
     }
 
-    solution.0 = score_1;
-    solution.1 = score_2;
     info.duration = timer.elapsed();
 }
 
