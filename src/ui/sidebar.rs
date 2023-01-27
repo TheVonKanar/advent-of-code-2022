@@ -16,9 +16,9 @@ pub fn draw_sidebar(
     egui::SidePanel::left("sidebar").show(egui_ctx.ctx_mut(), |ui| {
         for solver in query.iter() {
             ui.horizontal(|ui| {
-                if ui.button(format!("Day #{:02}", solver.0)).clicked() {
-                    ev_writer.send(SelectSolverEvent(solver.0));
-                    pkv.set(PKV_SELECTED_SOLVER, &solver.0)
+                if ui.button(format!("Day #{:02}", solver.index)).clicked() {
+                    ev_writer.send(SelectSolverEvent(solver.index));
+                    pkv.set(PKV_SELECTED_SOLVER, &solver.index)
                         .expect("Failed to store Selected Day");
                 }
             });
