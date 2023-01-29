@@ -19,13 +19,13 @@ pub fn draw_body(
                         solver.index.to_string()
                     ));
 
-                    ui.label(format!("Part 1: {}", solution.0.to_string()));
-                    ui.label(format!("Part 2: {}", solution.1.to_string()));
+                    ui.label(format!("Part 1: {}", solution.0));
+                    ui.label(format!("Part 2: {}", solution.1));
                     ui.label(format!(
                         "Duration: {}ms",
                         info.duration.as_millis().to_string()
                     ));
-                    ui.label(info.description);
+                    ui.label(&info.description);
                 }
             }
         }

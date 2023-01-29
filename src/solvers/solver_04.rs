@@ -6,8 +6,8 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
     let timer = Instant::now();
     let puzzle = get_puzzle(solver.index);
 
-    solution.0 = 0;
-    solution.1 = 0;
+    let mut count_1 = 0;
+    let mut count_2 = 0;
 
     for line in puzzle.lines() {
         let mut pairs: Vec<Vec<usize>> = Vec::new();
@@ -19,15 +19,17 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
         if (pairs[0][0] >= pairs[1][0] && pairs[0][1] <= pairs[1][1])
             || (pairs[1][0] >= pairs[0][0] && pairs[1][1] <= pairs[0][1])
         {
-            solution.0 += 1;
+            count_1 += 1;
         }
 
         // Part 2.
         if pairs[0][0] <= pairs[1][1] && pairs[1][0] <= pairs[0][1] {
-            solution.1 += 1;
+            count_2 += 1;
         }
     }
 
+    solution.0 = count_1.to_string();
+    solution.1 = count_2.to_string();
     info.duration = timer.elapsed();
 }
 
@@ -35,6 +37,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 fn test_04() {
     let (solver, mut solution, mut info) = super::create_solver_bundle(4, resolve);
     (solver.resolve)(&solver, &mut solution, &mut info);
-    assert_eq!(solution.0, 453);
-    assert_eq!(solution.1, 919);
+    assert_eq!(solution.0, "453");
+    assert_eq!(solution.1, "919");
 }

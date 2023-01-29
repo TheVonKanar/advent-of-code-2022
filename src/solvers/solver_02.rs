@@ -6,14 +6,14 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
     let timer = Instant::now();
     let puzzle = get_puzzle(solver.index);
 
-    solution.0 = 0;
-    solution.1 = 0;
+    let mut score_1 = 0;
+    let mut score_2 = 0;
 
     for line in puzzle.lines() {
         let cols: Vec<&str> = line.split(" ").collect();
 
         // Part 1: XYZ is Rock/Paper/Scissors.
-        solution.0 += match cols[0] {
+        score_1 += match cols[0] {
             "A" => match cols[1] {
                 "X" => 1 + 3,
                 "Y" => 2 + 6,
@@ -36,7 +36,7 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
         };
 
         // Part 2: XYZ is Lose/Draw/Win.
-        solution.1 += match cols[0] {
+        score_2 += match cols[0] {
             "A" => match cols[1] {
                 "X" => 0 + 3,
                 "Y" => 3 + 1,
@@ -59,6 +59,8 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
         }
     }
 
+    solution.0 = score_1.to_string();
+    solution.1 = score_2.to_string();
     info.duration = timer.elapsed();
 }
 
@@ -66,6 +68,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 fn test_02() {
     let (solver, mut solution, mut info) = super::create_solver_bundle(2, resolve);
     (solver.resolve)(&solver, &mut solution, &mut info);
-    assert_eq!(solution.0, 11906);
-    assert_eq!(solution.1, 11186);
+    assert_eq!(solution.0, "11906");
+    assert_eq!(solution.1, "11186");
 }

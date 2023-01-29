@@ -36,25 +36,25 @@ impl Solver {
 }
 
 #[derive(Component)]
-pub struct Solution(pub usize, pub usize);
+pub struct Solution(pub String, pub String);
 
 impl Solution {
     pub fn new() -> Solution {
-        Solution(0, 0)
+        Solution(String::new(), String::new())
     }
 }
 
 #[derive(Component)]
 pub struct Info {
     pub duration: Duration,
-    pub description: &'static str,
+    pub description: String,
 }
 
 impl Info {
     pub fn new() -> Info {
         Info {
             duration: Duration::ZERO,
-            description: "",
+            description: String::new(),
         }
     }
 }

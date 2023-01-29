@@ -21,8 +21,8 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 
     loads.sort_by(|a, b| b.cmp(a));
 
-    solution.0 = loads[0];
-    solution.1 = loads[0] + loads[1] + loads[2];
+    solution.0 = loads[0].to_string();
+    solution.1 = (loads[0] + loads[1] + loads[2]).to_string();
     info.duration = timer.elapsed();
 }
 
@@ -30,6 +30,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 fn test_01() {
     let (solver, mut solution, mut info) = super::create_solver_bundle(1, resolve);
     (solver.resolve)(&solver, &mut solution, &mut info);
-    assert_eq!(solution.0, 69281);
-    assert_eq!(solution.1, 201524);
+    assert_eq!(solution.0, "69281");
+    assert_eq!(solution.1, "201524");
 }
