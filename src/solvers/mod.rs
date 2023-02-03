@@ -2,6 +2,7 @@ mod solver_01;
 mod solver_02;
 mod solver_03;
 mod solver_04;
+mod solver_05;
 
 use std::time::{Duration, Instant};
 
@@ -68,6 +69,7 @@ fn init_solvers(
     commands.spawn(create_solver_bundle(2, solver_02::resolve));
     commands.spawn(create_solver_bundle(3, solver_03::resolve));
     commands.spawn(create_solver_bundle(4, solver_04::resolve));
+    commands.spawn(create_solver_bundle(5, solver_05::resolve));
 
     if let Ok(selected_solver) = pkv.get::<usize>(PKV_SELECTED_SOLVER) {
         ev_writer.send(SelectSolverEvent(selected_solver));
