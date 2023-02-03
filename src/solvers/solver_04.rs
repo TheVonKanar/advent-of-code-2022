@@ -1,9 +1,6 @@
-use std::time::Instant;
-
 use super::{get_puzzle, Info, Solution, Solver};
 
-pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &mut Info) {
-    let timer = Instant::now();
+pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, _: &mut Info) {
     let puzzle = get_puzzle(solver.index);
 
     let mut count_1 = 0;
@@ -30,7 +27,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 
     solution.0 = count_1.to_string();
     solution.1 = count_2.to_string();
-    info.duration = timer.elapsed();
 }
 
 #[test]

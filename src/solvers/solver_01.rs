@@ -1,9 +1,6 @@
-use std::time::Instant;
-
 use super::{get_puzzle, Info, Solution, Solver};
 
-pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &mut Info) {
-    let timer = Instant::now();
+pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, _: &mut Info) {
     let puzzle = get_puzzle(solver.index);
 
     let mut loads: Vec<usize> = vec![];
@@ -23,7 +20,6 @@ pub(super) fn resolve(solver: &Solver, mut solution: &mut Solution, mut info: &m
 
     solution.0 = loads[0].to_string();
     solution.1 = (loads[0] + loads[1] + loads[2]).to_string();
-    info.duration = timer.elapsed();
 }
 
 #[test]

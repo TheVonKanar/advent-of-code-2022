@@ -3,7 +3,7 @@ mod solver_02;
 mod solver_03;
 mod solver_04;
 
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 use bevy::prelude::*;
 use bevy_pkv::PkvStore;
@@ -81,7 +81,15 @@ fn run_solvers(
     for ev in ev_reader.iter() {
         for (solver, mut solution, mut info) in query.iter_mut() {
             if ev.0 == solver.index {
+                // Reset Solution and Info content.
+                solution.0 = String::new();
+                solution.1 = String::new();
+                info.description = String::new();
+
+                // Solve the problem.
+                let timer = Instant::now();
                 (solver.resolve)(solver, solution.as_mut(), info.as_mut());
+                info.duration = timer.elapsed();
             }
         }
     }
