@@ -15,17 +15,14 @@ pub fn draw_body(
             for (solver, solution, info) in query.iter() {
                 if solver.index == selected_solver {
                     ui.label(format!(
-                        "Showing results for solver n°{}",
-                        solver.index.to_string()
-                    ));
-
-                    ui.label(format!("Part 1: {}", solution.0));
-                    ui.label(format!("Part 2: {}", solution.1));
-                    ui.label(format!(
-                        "Duration: {}ms",
+                        "Showing results for solver n°{} ({})",
+                        solver.index.to_string(),
                         info.duration.as_millis().to_string()
                     ));
-                    ui.label(&info.description);
+
+                    ui.monospace(format!("Part 1: {}", solution.0));
+                    ui.monospace(format!("Part 2: {}", solution.1));
+                    ui.monospace(&info.description);
                 }
             }
         }
